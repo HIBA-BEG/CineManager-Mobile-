@@ -1,0 +1,22 @@
+
+
+// dotenv: A library for loading environment variables from a .env file.
+// express: A minimal web application framework for Node.js
+// mongoose: A MongoDB object modeling library for Node.js
+// nodemon: Automatically restarts the server when changes are detected.
+// winston: A versatile logging library for Node.js
+//  cors: Middleware for handling Cross-Origin Resource Sharing
+// Bcryptjs
+// Jsonwebtoken
+
+
+not installed yet: 
+
+
+// Nodemailer
+// Jest ou Mocha
+
+
+WebUI: http://192.168.14.0:9001 http://127.0.0.1:9001
+   RootUser: minioadmin
+   RootPass: minioadmin
