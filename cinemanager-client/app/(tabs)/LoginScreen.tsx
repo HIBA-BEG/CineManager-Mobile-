@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
+import { login } from '../services/authService';
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('');
@@ -7,12 +8,19 @@ const LoginScreen = () => {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!email || !password) {
             alert('Both fields are required.');
             return;
           }
-        console.log('Logging in with:', email, password);
+          try {
+            const response = await login({ email, password });
+            console.log('Login successful:', response);
+        } catch (error) {
+            console.error('Login failed:', error);
+            setError('Login failed. Please try again.');
+        }
+        // console.log('Logging in with:', email, password);
     };
 
     return (

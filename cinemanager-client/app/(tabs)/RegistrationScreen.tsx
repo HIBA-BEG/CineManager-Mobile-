@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
+import { register } from '../services/authService';
 
 const RegistrationScreen = () => {
     const [formData, setFormData] = useState({
@@ -19,8 +20,20 @@ const RegistrationScreen = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = () => {
-        console.log('Registering with:', formData);
+    const handleSubmit = async () => {
+        if (!formData.nom || !formData.prenom || !formData.email || !formData.password || !formData.numero_telephone) {
+            setError('All fields are required.');
+            return;
+        }
+        try {
+            const response = await register(formData);
+            console.log('Registration successful:', response);
+            // I still need to add the redirection
+        } catch (error) {
+            console.error('Registration failed:', error);
+            setError('Registration failed. Please try again.');
+        }
+        // console.log('Registering with:', formData);
     };
 
     return (
@@ -45,12 +58,12 @@ const RegistrationScreen = () => {
                             />
                         </View>
                     ))}
-                    <View>
+                    {/* <View>
                         <Text style={styles.label}>Profile Picture</Text>
                         <TouchableOpacity style={styles.uploadButton}>
                             <Text style={styles.uploadButtonText}>Upload Profile Picture</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View> */}
                     <TouchableOpacity style={styles.button} onPress={handleSubmit} disabled={isLoading}>
                         <Text style={styles.buttonText}>{isLoading ? 'Registering...' : 'Register'}</Text>
                     </TouchableOpacity>
